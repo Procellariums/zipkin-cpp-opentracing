@@ -52,7 +52,7 @@ OtTracerFactory::MakeTracer(const char *configuration,
   if (document.HasMember("collector_port")) {
     options.collector_port = document["collector_port"].GetInt();
   }
-  if (document.HasMember("collector_endpoint)) {
+  if (document.HasMember("collector_endpoint")) {
     options.collector_endoint = document["collector_endoint"].GetString();
   }
   if (document.HasMember("collector_timeout")) {
