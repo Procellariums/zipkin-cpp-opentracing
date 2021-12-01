@@ -11,6 +11,7 @@ set(ZIPKIN_SRCS src/zipkin_core_types.cc
                  src/zipkin_reporter_impl.cc
                  src/zipkin_http_transporter.cc)
 
+find_library(CURL_LIB curl)
 set(WIN32_LIBRARIES)
 if(WIN32)
    list(APPEND WIN32_LIBRARIES wsock32.lib ws2_32.lib)
@@ -36,7 +37,7 @@ endif()
 
 if (BUILD_PLUGIN)
   add_library(zipkin-plugin-static STATIC ${ZIPKIN_SRCS})
-  target_link_libraries(zipkin-plugin-static Threads::Threads ${CURL_LIBRARIES} ${WIN32_LIBRARIES})
+  target_link_libraries(zipkin-plugin-static Threads::Threads ${CURL_LIB} ${WIN32_LIBRARIES})
   set_property(TARGET zipkin-plugin-static PROPERTY POSITION_INDEPENDENT_CODE ON)
 endif()
 
