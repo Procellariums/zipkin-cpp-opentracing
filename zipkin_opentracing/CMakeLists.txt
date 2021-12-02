@@ -1,5 +1,7 @@
 find_path(OPENTRACING_INCLUDE_DIR NAMES opentracing/tracer.h)
+
 find_library(OPENTRACING_LIB opentracing)
+find_library(OP_LIB NAMES libopentracing.a PATHS ${CURL_INCLUDE_DIR/../lib})
 
 include_directories(SYSTEM ${OPENTRACING_INCLUDE_DIR})
 
@@ -45,8 +47,8 @@ if (BUILD_PLUGIN)
   file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/export.map
     "{ global: OpenTracingMakeTracerFactory; local: *; };")
   add_library(zipkin_opentracing_plugin MODULE ${ZIPKIN_OPENTRACING_SRCS})
-  target_link_libraries(zipkin_opentracing_plugin ${OPENTRACING_LIB}
-    zipkin-plugin-static
+  target_link_libraries(zipkin_opentracing_plugin ${OP_LIB} 
+    zipkin-plugin-static 
     -static-libgcc
     -static-libstdc++
     -Wl,--version-script=${CMAKE_CURRENT_BINARY_DIR}/export.map)
