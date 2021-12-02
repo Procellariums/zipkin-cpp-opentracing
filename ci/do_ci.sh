@@ -37,6 +37,7 @@ elif [[ "$1" == "bazel.build" ]]; then
   exit 0
 elif [[ "$1" == "cmake.plugin" ]]; then
   "${SRC_DIR}"/ci//build_plugin.sh
+  "${SRC_DIR}"/ci/build-nginx-plugin.sh
   exit 0
 elif [[ "$1" == "release" ]]; then
   "${SRC_DIR}"/ci//build_plugin.sh
